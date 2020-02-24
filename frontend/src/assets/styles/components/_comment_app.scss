@@ -1,0 +1,34 @@
+.comments-container{
+    margin: 50px auto;
+    width: 400px;
+    height: 500px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.gavatar-icon{
+    border-radius: 5px;
+    width: 50px;
+}
+
+#search-comment input{
+    margin-top: 20px;
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    display: block;
+    width: 200px;
+    padding: 10px;
+    background: url('https://res.cloudinary.com/dtwqtpteb/image/upload/v1582556340/ees8sth1yxqa9g5dcm96.png')no-repeat 5%;
+    border-radius: 5px;
+}
+
+#search-comment ::placeholder{
+    padding-left: 25px;
+}
+
+.buttons-container{
+    display: flex;
+    justify-content: center;
+}
+
+
