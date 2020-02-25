@@ -76,3 +76,16 @@ function _buildCriteria(filterBy) {
     }
     return criteria;
 }
+
+function _buildCriteria(filterBy) {
+    //db.getCollection('comment').find({'$or':[{'email': 'shani@bigpanda.io'},{'content':'Goodbye:)'}]})
+    let criteria = {}
+    try {
+        if (filterBy.email) {
+            criteria.email = filterBy.email
+        }
+    } catch (err) {
+        console.log(err)
+    }
+    return criteria;
+}

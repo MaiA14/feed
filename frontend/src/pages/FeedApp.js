@@ -9,9 +9,7 @@ export default class Feed extends Component {
 
     state = {
         comments: [],
-        filterBy: {
-            email: ''
-        },
+        filterBy: null
     }
 
     componentDidMount() {
@@ -21,6 +19,8 @@ export default class Feed extends Component {
     loadComments = () => {
         commentService.query(this.state.filterBy).then((comments) => {
             this.setState({ comments });
+            console.log('comments -> ', comments);
+
         })
     }
 
@@ -31,13 +31,22 @@ export default class Feed extends Component {
         }), this.loadComments);
     }
 
+    onSave = (comment) => {
+        commentService.saveComment(comment)
+        let commentsUpdated = this.state.comments
+        commentsUpdated.push(comment)
+        this.setState({ comments: commentsUpdated })
+    }
+
     render() {
         return (
             <div>
+                <h1 className="app-title">Feed</h1>
+                <p className="app-description">Share your thoughts with the world!</p>
                 <div className="comments-container">
-                <div className="comment-form">
-                    <CommentForm></CommentForm>
-                </div>
+                    <div className="comment-form">
+                        <CommentForm onSave={this.onSave}></CommentForm>
+                    </div>
                     <div className="filter-container">
                         <CommentFilter filterBy={this.state.filterBy}
                             onSetFilter={this.onSetFilter}></CommentFilter>

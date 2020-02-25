@@ -2,6 +2,13 @@ import React, { Component } from 'react'
 
 export default class CommentFilter extends Component {
 
+    state = {
+        filterBy: {
+            email: '',
+            content: ''
+        }
+    }
+
     changeInput = (ev) => {
         const field = ev.target.name;
         let value = (ev.target.type === 'number') ? +ev.target.value : ev.target.value
@@ -13,7 +20,7 @@ export default class CommentFilter extends Component {
             <form id="search-comment">
                 <input type="text" 
                     name="email" placeholder="Filter"
-                    value={this.props.filterBy.email}
+                    value={this.props.filterBy}
                     onChange={this.changeInput} />
             </form>
         )

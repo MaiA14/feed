@@ -1,5 +1,6 @@
 .comments-container{
     margin: 50px auto;
+    margin-top:5px;
     width: 400px;
     height: 500px;
     overflow: hidden;
@@ -11,6 +12,21 @@
     width: 50px;
 }
 
+.app-title{
+    font-family: Lobster;
+    font-weight: bold;
+    font-size: 60px;
+    text-align: center;
+    color: #3fa8df;
+    text-shadow: 2px 2px #0e6a9b;
+    margin: 0;
+}
+
+.app-description{
+    text-align: center;
+    font-family: Lobster; 
+}
+
 #search-comment input{
     margin-top: 20px;
     outline: none;
@@ -20,10 +36,7 @@
     padding: 10px;
     background: url('https://res.cloudinary.com/dtwqtpteb/image/upload/v1582556340/ees8sth1yxqa9g5dcm96.png')no-repeat 5%;
     border-radius: 5px;
-}
-
-#search-comment ::placeholder{
-    padding-left: 25px;
+    text-indent: 30px;
 }
 
 .buttons-container{

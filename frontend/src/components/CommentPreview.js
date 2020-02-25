@@ -9,7 +9,7 @@ export default function CommentPreview(props) {
                 </div>
                 <div className="email-and-msg">
                     <div className="comment-email-preview">{props.comment.email}</div>
-                    <div className="comment-content-preview">{props.comment.comment}</div>
+                    <div className="comment-content-preview">{props.comment.content}</div>
                 </div>
             </div>
         </div>

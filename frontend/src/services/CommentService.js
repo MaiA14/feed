@@ -13,7 +13,7 @@ export default {
 }
 
 function query() {
-    return HttpService.get(`comment`)
+    return HttpService.get(`comment?....`)
 }
 
 function getCommentById(commentId) {
@@ -21,9 +21,11 @@ function getCommentById(commentId) {
 }
 
 function saveComment(comment) {
+    console.log('saveComment',comment);
+    
     if (comment._id)
         return HttpService.put(`comment/${comment._id}`, comment)
-    return HttpService.post(`comment,${comment}`)
+    return HttpService.post(`comment/`,comment)
 }
 
 function deleteComment(commentId) {
