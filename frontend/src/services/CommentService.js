@@ -12,8 +12,8 @@ export default {
     deleteComment,
 }
 
-function query() {
-    return HttpService.get(`comment?....`)
+function query(filterBy = '') {
+    return HttpService.get(`comment?filterBy=${filterBy}`)
 }
 
 function getCommentById(commentId) {
@@ -21,11 +21,9 @@ function getCommentById(commentId) {
 }
 
 function saveComment(comment) {
-    console.log('saveComment',comment);
-    
     if (comment._id)
         return HttpService.put(`comment/${comment._id}`, comment)
-    return HttpService.post(`comment/`,comment)
+    return HttpService.post(`comment/`, comment)
 }
 
 function deleteComment(commentId) {

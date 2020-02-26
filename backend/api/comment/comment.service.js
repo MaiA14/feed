@@ -9,8 +9,8 @@ module.exports = {
     add
 }
 
-async function query(filterBy = {}) {
-    const criteria = _buildCriteria(filterBy)
+async function query(params) {
+    const criteria = _buildCriteria(params.filterBy)
     const collection = await dbService.getCollection('comment')
     try {
         const comments = await collection.find(criteria).toArray();
@@ -66,26 +66,19 @@ async function add(comment) {
     }
 }
 
-function _buildCriteria(filterBy) {
-    const criteria = {};
-    if (filterBy.txt) {
-        criteria.commentName = filterBy.txt
-    }
-    if (filterBy.minBalance) {
-        criteria.balance = { $gte: +filterBy.minBalance }
-    }
-    return criteria;
-}
 
 function _buildCriteria(filterBy) {
-    //db.getCollection('comment').find({'$or':[{'email': 'shani@bigpanda.io'},{'content':'Goodbye:)'}]})
     let criteria = {}
     try {
-        if (filterBy.email) {
-            criteria.email = filterBy.email
+        if (filterBy !== '') {
+            criteria = {
+                $or: [{ 'email': { $regex: `.*${filterBy}.`, $options: 'i' } },
+                { 'content': { $regex: `.*${filterBy}.`, $options: 'i' } }]
+            }
         }
     } catch (err) {
         console.log(err)
     }
+
     return criteria;
 }

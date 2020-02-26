@@ -9,7 +9,7 @@ export default class Feed extends Component {
 
     state = {
         comments: [],
-        filterBy: null
+        filterBy: ''
     }
 
     componentDidMount() {
@@ -17,18 +17,14 @@ export default class Feed extends Component {
     }
 
     loadComments = () => {
-        commentService.query(this.state.filterBy).then((comments) => {
+        let filterBy = this.state.filterBy;
+        commentService.query(filterBy).then((comments) => {
             this.setState({ comments });
-            console.log('comments -> ', comments);
-
         })
     }
 
     onSetFilter = (filterBy) => {
-        this.setState(prevState => ({
-            filterBy:
-                { ...prevState.filterBy, ...filterBy }
-        }), this.loadComments);
+        this.setState({filterBy},this.loadComments)
     }
 
     onSave = (comment) => {
