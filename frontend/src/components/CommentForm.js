@@ -31,14 +31,16 @@ export default class CommentForm extends Component {
     inputChange = (ev) => {
         let fieldName = ev.target.name;
         let fieldValue = ev.target.value;
-        this.setState({ [fieldName]: fieldValue });
+        if (!fieldValue || !fieldValue.startsWith(' ')){
+            this.setState({ [fieldName]: fieldValue });
+        }
     }
 
     render() {
         return (
             <div className="form-container">
                 <form>
-                    <input pattern="/^[a-zA-Z0-9.!#$%&amp;'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required placeholder="Email" name="email"
+                    <input type="email" required placeholder="Email" name="email"
                         onChange={this.inputChange} value={this.state.email}></input>
                     <input type="text" placeholder="Message" name="content"
                         onChange={this.inputChange} value={this.state.content}></input>

@@ -58,14 +58,12 @@ async function update(id, comment) {
 
 async function add(comment) {
     const collection = await dbService.getCollection('comment')
-    if (!comment) {
-        try {
-            await collection.insertOne(comment);
-            return comment;
-        } catch (err) {
-            console.log(`ERROR: cannot insert comment`)
-            throw err;
-        }
+    try {
+        await collection.insertOne(comment);
+        return comment;
+    } catch (err) {
+        console.log(`ERROR: cannot insert comment`)
+        throw err;
     }
 }
 
