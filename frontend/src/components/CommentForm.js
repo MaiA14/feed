@@ -40,11 +40,11 @@ export default class CommentForm extends Component {
                 <form>
                     <input pattern="/^[a-zA-Z0-9.!#$%&amp;'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required placeholder="Email" name="email"
                         onChange={this.inputChange} value={this.state.email}></input>
-                    <input type="text" required="required" placeholder="Message" name="content"
-                        onChange={this.inputChange}  value={this.state.content}></input>
-                
-                    <input type="submit" onClick={this.onSave} className="submit-button"></input>
-           
+                    <input type="text" placeholder="Message" name="content"
+                        onChange={this.inputChange} value={this.state.content}></input>
+                <div className="form-buttons">
+                    <button onClick={this.onSave} className="submit-button">Submit</button>
+                </div>
                 </form>
             </div>
 
