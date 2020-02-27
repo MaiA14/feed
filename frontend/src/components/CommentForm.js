@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 export default class CommentForm extends Component {
 
     state = {
-        gravatar:'https://he.gravatar.com/userimage/131942614/161c0e6bc0868e9a0253707495c1c546.jpeg',
+        gravatar: 'https://he.gravatar.com/userimage/131942614/161c0e6bc0868e9a0253707495c1c546.jpeg',
         email: '',
         content: ''
     }
@@ -25,7 +25,7 @@ export default class CommentForm extends Component {
 
     onSave = () => {
         this.props.onSave(this.state);
-        this.setState({ email: '', content: ''});
+        this.setState({ email: '', content: '' });
     }
 
     inputChange = (ev) => {
@@ -37,14 +37,17 @@ export default class CommentForm extends Component {
     render() {
         return (
             <div className="form-container">
-                <input type="text" placeholder="Email" name="email"
-                    onChange={this.inputChange} value={this.state.email}></input>    
-                <input type="text" placeholder="Message"  name="content"
-                    onChange={this.inputChange} value={this.state.content}></input>
-                <div className="form-buttons">
-                    <button onClick={this.onSave} className="submit-button">Submit</button>
-                </div>
+                <form>
+                    <input pattern="/^[a-zA-Z0-9.!#$%&amp;'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required placeholder="Email" name="email"
+                        onChange={this.inputChange} value={this.state.email}></input>
+                    <input type="text" required="required" placeholder="Message" name="content"
+                        onChange={this.inputChange}  value={this.state.content}></input>
+                
+                    <input type="submit" onClick={this.onSave} className="submit-button"></input>
+           
+                </form>
             </div>
+
         )
     }
 }

@@ -6,7 +6,8 @@ module.exports = {
     getById,
     remove,
     update,
-    add
+    add,
+    validateInputs
 }
 
 async function query(params) {
@@ -57,15 +58,20 @@ async function update(id, comment) {
 
 async function add(comment) {
     const collection = await dbService.getCollection('comment')
-    try {
-        await collection.insertOne(comment);
-        return comment;
-    } catch (err) {
-        console.log(`ERROR: cannot insert comment`)
-        throw err;
+    if (!comment) {
+        try {
+            await collection.insertOne(comment);
+            return comment;
+        } catch (err) {
+            console.log(`ERROR: cannot insert comment`)
+            throw err;
+        }
     }
 }
 
+async function validateInputs(email, content) {
+    if (!email || !content) return Promise.reject('email and content are required!')
+}
 
 function _buildCriteria(filterBy) {
     let criteria = {}
