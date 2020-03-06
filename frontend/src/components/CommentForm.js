@@ -31,7 +31,7 @@ export default class CommentForm extends Component {
     inputChange = (ev) => {
         let fieldName = ev.target.name;
         let fieldValue = ev.target.value;
-        if (!fieldValue || !fieldValue.startsWith(' ')){
+        if (fieldValue !== null || !fieldValue.startsWith(' ')){
             this.setState({ [fieldName]: fieldValue });
         }
     }

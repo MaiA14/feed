@@ -24,14 +24,31 @@ export default class Feed extends Component {
     }
 
     onSetFilter = (filterBy) => {
-        this.setState({filterBy},this.loadComments)
+        this.setState({ filterBy }, this.loadComments)
+    }
+
+    validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
     }
 
     onSave = (comment) => {
-        commentService.saveComment(comment)
-        let commentsUpdated = this.state.comments
-        commentsUpdated.push(comment)
-        this.setState({ comments: commentsUpdated })
+        if (comment.email === '' || comment.content === '') {
+            alert('Please enter mail and content')
+            return;
+        }
+        else {
+            if (!this.validateEmail(comment.email)) {
+                alert('Please enter valid email');
+                return;
+            }
+            else {
+                commentService.saveComment(comment)
+                let commentsUpdated = this.state.comments
+                commentsUpdated.push(comment)
+                this.setState({ comments: commentsUpdated })
+            }
+        }
     }
 
     render() {

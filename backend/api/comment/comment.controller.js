@@ -26,8 +26,6 @@ async function updateComment(req, res) {
 
 async function addComment(req, res) {
     var comment = req.body;
-    var email = req.body.email
-    console.log(req.body)
     comment = await commentService.add(comment)
     res.send(comment)
 }
