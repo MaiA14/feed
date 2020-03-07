@@ -23,8 +23,9 @@ export default class CommentForm extends Component {
         }
     }
 
-    onSave = () => {
+    onSave = (e) => {
         this.props.onSave(this.state);
+        e.preventDefault();
         this.setState({ email: '', content: '' });
     }
 
@@ -40,7 +41,7 @@ export default class CommentForm extends Component {
         return (
             <div className="form-container">
                 <form>
-                    <input type="email" required placeholder="Email" name="email"
+                    <input type="email" placeholder="Email" name="email"
                         onChange={this.inputChange} value={this.state.email}></input>
                     <input type="text" placeholder="Message" name="content"
                         onChange={this.inputChange} value={this.state.content}></input>

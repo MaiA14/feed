@@ -14,7 +14,7 @@ async function query(params) {
     const criteria = _buildCriteria(params.filterBy)
     const collection = await dbService.getCollection('comment')
     try {
-        const comments = await collection.find(criteria).toArray();
+        const comments = await collection.find(criteria).sort({_id:-1}).toArray();
         return comments
     } catch (err) {
         console.log('ERROR: cannot find comments')

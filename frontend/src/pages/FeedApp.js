@@ -28,8 +28,15 @@ export default class Feed extends Component {
     }
 
     validateEmail(email) {
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
+        var re1 = (/^[a-z]((?!\.\.)([a-z\.])){,28}[a-z0-9]@gmail.com$/i).test(String(email).toLowerCase());
+        var re2 = (/^[a-z]((?!\.\.)([\w\.])){3,30}[\w]@yahoo.com$/i).test(String(email).toLowerCase());
+        var re3 = (/[a-z]((?!\.\.)([\w\.])){0,62}[\w]@(outlook.com|hotmail.com)$/i).test(String(email).toLowerCase());
+        var re4 = (/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i).test(String(email).toLowerCase());
+        return (re1 || re2 || re3 || re4)
+    }
+
+    isMailInLowerCase(str) {
+        return str === str.toUpperCase();
     }
 
     onSave = (comment) => {
@@ -38,14 +45,16 @@ export default class Feed extends Component {
             return;
         }
         else {
-            if (!this.validateEmail(comment.email)) {
+            let mailValid = (this.validateEmail(comment.email) ||
+                this.isMailInLowerCase(comment.email));
+            if (!mailValid) {
                 alert('Please enter valid email');
                 return;
             }
             else {
                 commentService.saveComment(comment)
                 let commentsUpdated = this.state.comments
-                commentsUpdated.push(comment)
+                commentsUpdated.unshift(comment)
                 this.setState({ comments: commentsUpdated })
             }
         }
