@@ -14,7 +14,7 @@ async function query(params) {
     const criteria = _buildCriteria(params.filterBy)
     const collection = await dbService.getCollection('comment')
     try {
-        const comments = await collection.find(criteria).sort({_id:-1}).toArray();
+        const comments = await collection.find(criteria).sort({ _id: -1 }).toArray();
         return comments
     } catch (err) {
         console.log('ERROR: cannot find comments')
@@ -77,7 +77,9 @@ function _buildCriteria(filterBy) {
         if (filterBy !== '') {
             criteria = {
                 $or: [{ 'email': { $regex: `.*${filterBy}.`, $options: 'i' } },
-                { 'content': { $regex: `.*${filterBy}.`, $options: 'i' } }]
+                { 'content': { $regex: `.*${filterBy}.`, $options: 'i' } },
+                { 'email': `${filterBy}` }, { 'content': `${filterBy}` }
+                ]
             }
         }
     } catch (err) {
