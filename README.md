@@ -1,6 +1,9 @@
 # Feed
 An app that contains a comment feed with the ability to insert new comments and filter the existing comments.
-Developed in React &amp; NodeJS.
+
+Technologies:\
+Front-end : React ,Sass ,HTML5.\
+Back-end : Node.js ,Mongodb ,Express.
 
 App contains some validations as you can see here:
 
