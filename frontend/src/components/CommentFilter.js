@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { DebounceInput } from 'react-debounce-input';
 
 export default class CommentFilter extends Component {
 
@@ -17,7 +18,9 @@ export default class CommentFilter extends Component {
     render() {
         return (
             <form id="search-comment">
-                <input type="text"
+                <DebounceInput
+                    minLength={2}
+                    debounceTimeout={300} type="text"
                     name="filterBy" placeholder="Filter"
                     value={this.state.filterBy}
                     onChange={this.changeInput} />
